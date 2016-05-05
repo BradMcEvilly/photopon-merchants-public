@@ -1,0 +1,45 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Statistics</h1>
+</div>
+<div class="wrapper-md">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <span class="label bg-danger pull-right m-t-xs">Total: {{stats.numRedeems}}/{{stats.numShares}}</span>
+          Coupons
+        </div>
+        <table class="table table-striped m-b-none">
+          <thead>
+            <tr>
+              <th>Coupon</th>
+              <th>Location</th>
+              <th>Shared</th>
+              <th>Redeemed</th>
+              <th>Ratio</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr ng-repeat="c in coupons">                    
+              <td>{{c.get('title')}}</td>
+              <td>{{c.getLocationTitle()}}</td>
+              <td>{{c.get('numShared')}}</td>
+              <td>
+                <button class="btn btn-default btn-xs" ng-disabled="c.noAvailableRedeems" ui-sref="app.analytics.redeem({ id: '{{c.id}}' })">{{c.actualNumRedeemed}}</button>
+              </td>
+              <td>
+                <div class="progress progress-xs m-t-xs m-b-none">
+                  <div class="progress-bar bg-info" data-toggle="tooltip" data-original-title="{{c.getShareRato()}}" style="width: {{c.getShareRato()}}"></div>
+                </div>
+              </td>
+              
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,175 @@
+<div class="bg-light lt b-b wrapper-md">
+  <div class="row">
+    <div class="col-sm-6 col-xs-12">
+      <h1 class="m-n font-thin h3 text-black">Dashboard</h1>
+    </div>
+  </div>
+</div>
+<div class="hbox hbox-auto-xs hbox-auto-sm">
+  <!-- main -->
+  <div class="col">
+    <!-- / main header -->
+    <div class="wrapper-md">
+      <!-- stats -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row row-sm text-center">
+            <div class="col-xs-3">
+              <div class="panel padder-v item card">
+                <div class="h1 text-info font-thin h1">{{locations.length}}</div>
+                <span class="text-muted text-xs">Locations</span>
+                <div class="top text-right w-full">
+                  <i class="fa fa-caret-down text-warning m-r-sm"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-3">
+              <a href class="block panel padder-v item card">
+                <span class="text-success font-thin h1 block">{{coupons.length}}</span>
+                <span class="text-muted text-xs">Coupons</span>
+                <span class="bottom text-right w-full">
+                  <i class="fa fa-cloud-upload text-success m-r-sm"></i>
+                </span>
+              </a>
+            </div>
+            <div class="col-xs-3">
+              <a href class="block panel padder-v item card">
+                <span class="text-primary font-thin h1 block">{{stats.numShares}}</span>
+                <span class="text-muted text-xs">Total Shares</span>
+                <span class="top text-left">
+                  <i class="fa fa-caret-up text-warning m-l-sm"></i>
+                </span>
+              </a>
+            </div>
+            <div class="col-xs-3">
+              <div class="panel padder-v item card">
+                <div class="font-thin h1">{{stats.numRedeems}}</div>
+                <span class="text-muted text-xs">Total Redeems</span>
+                <div class="bottom text-left">
+                  <i class="fa fa-caret-up text-warning m-l-sm"></i>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+      </div>
+      <!-- / stats -->
+
+
+      <!-- tasks -->
+      <div class="row">
+
+          <div class="col-md-6">            
+            <div class="panel no-border">
+              
+              <div class="panel-heading wrapper b-b b-light">
+                <h4 class="font-thin m-t-none m-b-none text-muted">Locations</h4>              
+              </div>            
+
+              <ul class="list-group list-group-lg m-b-none">
+
+                <li class="list-group-item" ng-hide="locations.length">
+                  <a href class="thumb-sm m-r">
+                    
+                    <i class="icon-bell fa-fw" style="
+                        font-size: 26px;
+                        vertical-align: middle;
+                    "></i>
+
+                  </a>
+                  
+                  <a href style="display: inline-block; vertical-align: middle;">
+                    <span>You have no locations yet.</span>
+                  </a>
+                </li>
+                
+
+
+
+                <li class="list-group-item" ng-repeat="l in locations">
+                  <a href class="thumb-sm m-r">
+                    
+                    <i class="icon-pointer fa-fw" style="
+                        font-size: 26px;
+                        vertical-align: middle;
+                    "></i>
+
+                  </a>
+
+                  <span class="pull-right label bg-danger inline m-t-sm">{{l.get('location').latitude}}, {{l.get('location').longitude}}</span>
+
+                  <a href style="display: inline-block; vertical-align: middle;" ui-sref="app.editlocation({ id: '{{l.id}}' })">
+                    <span>{{l.get("name")}}</span>
+                    <br>
+                    <span class="text-muted">{{l.get("address")}}</span>
+                  </a>
+                </li>
+                
+
+              </ul>
+              
+              <div class="panel-footer">
+                <button class="btn btn-primary btn-addon btn-sm" ui-sref="app.addlocation"><i class="fa fa-plus"></i>Add Location</button>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <div class="col-md-6">
+            <div class="panel no-border">
+              <div class="panel-heading wrapper b-b b-light">
+                <!--<span class="text-xs text-muted pull-right">
+                  <i class="fa fa-circle text-primary m-r-xs"></i> 12
+                  <i class="fa fa-circle text-info m-r-xs m-l-sm"></i> 30
+                  <i class="fa fa-circle text-warning m-r-xs m-l-sm"></i> 98
+                </span>-->
+                <h4 class="font-thin m-t-none m-b-none text-muted">Coupons</h4>              
+              </div>
+              <ul class="list-group list-group-lg m-b-none">
+
+
+                <li class="list-group-item" ng-hide="locations.length">
+                  <a href class="thumb-sm m-r">
+                    
+                    <i class="icon-bell fa-fw" style="
+                        font-size: 26px;
+                        vertical-align: middle;
+                    "></i>
+
+                  </a>
+                  
+                  <a href style="display: inline-block; vertical-align: middle;">
+                    <span>You have no coupons yet.</span>
+                  </a>
+                </li>
+                
+
+
+                
+                <li class="list-group-item" ng-repeat="c in coupons">
+                  <a href class="thumb-sm m-r">
+                    <img src=" {{c.get('company').get('image').url() }} " class="r r-2x">
+                  </a>
+                  <span class="pull-right label bg-primary inline m-t-sm" title="{{c.getLocationTitleFull()}}">{{c.getLocationTitle()}}</span>
+                  <a ui-sref="app.editcoupon({ id: '{{c.id}}' })">{{c.get('title')}}</a>
+                </li>
+
+
+              </ul>
+              <div class="panel-footer">
+                <span class="pull-right badge badge-bg m-t-xs">{{coupons.length}}</span>
+                <button class="btn btn-primary btn-addon btn-sm" ui-sref="app.addcoupon"><i class="fa fa-plus"></i>Add Coupon</button>
+              </div>
+            </div>
+          </div>
+
+      </div>
+      <!-- / tasks -->
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,37 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Statistics</h1>
+</div>
+<div class="wrapper-md">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <span class="label bg-danger pull-right m-t-xs">Total: {{stats.numRedeems}}/{{stats.numShares}}</span>
+          Invoices
+        </div>
+        <table class="table table-striped m-b-none">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Invoice Items</th>
+              <th>Amount</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr ng-repeat="c in invoices">                    
+              <td>{{c.createdAt}}</td>
+              <td>{{c.get('billItems').join(", ")}}</td>
+              <td>${{c.get('amount') / 100}}</td>
+              <td><button class="btn btn-primary btn-addon btn-sm" ng-click="payInvoice(this)"><i class="fa fa-paypal"></i>Pay</button></td>
+              
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

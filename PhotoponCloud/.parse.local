@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "Photopon": {
+      "applicationId": "qyY21OT36AiP5hIEdrzrBvbOS1HgXzIK52oyzrAN"
+    },
+    "_default": {
+      "link": "Photopon"
+    }
+  }
+}

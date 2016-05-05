@@ -1,0 +1,48 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">All Locations</h1>
+</div>
+<div class="wrapper-md">
+  <div>
+    
+
+<!-- Locations -->
+      <div class="row" ng-show="locations">
+        <div class="col-sm-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              All Locations
+            </div>
+            <table class="table table-striped m-b-none">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Address</th>
+                  <th>Coordinates</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr ng-repeat="c in locations" ui-sref="app.editlocation({ id: '{{c.id}}' })">                    
+                  <td>{{c.get('name')}}</td>
+                  <td>{{c.get('address')}}</td>
+                  <td>({{c.get('location').latitude}}, {{c.get('location').longitude}})</td>
+                  
+                </tr>
+
+
+              </tbody>
+            </table>
+
+            <footer class="panel-footer text-right bg-light lter">
+              <button type="submit" class="btn btn-success" ui-sref="app.addlocation">New Location</button>
+            </footer>
+
+          </div>
+        </div>
+      </div>
+<!-- /Locations -->
+
+
+  </div>
+
+</div>

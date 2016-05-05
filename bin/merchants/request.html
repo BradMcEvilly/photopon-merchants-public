@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>  
+  <meta charset="utf-8" />
+  <title>Photopon | Making Coupons Social</title>
+  <meta name="description" content="Empower your business with Photopon. Make your coupons social." />
+  <meta name="keywords" content="photopon, coupon, social, share, redeem, local" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <link rel="stylesheet" href="libs/assets/animate.css/animate.css" type="text/css" />
+  <link rel="stylesheet" href="libs/assets/font-awesome/css/font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="libs/assets/simple-line-icons/css/simple-line-icons.css" type="text/css" />
+
+  <link rel="stylesheet" href="libs/jquery/bootstrap/dist/css/bootstrap.css" type="text/css" />
+  <link rel="stylesheet" href="css/font.css" type="text/css" />
+  <link rel="stylesheet" href="css/app.css" type="text/css" />
+
+</head>
+<body>
+	
+  <!-- header -->
+  <header id="header" class="navbar navbar-fixed-top bg-white-only padder-v"  data-spy="affix" data-offset-top="1">
+    <div class="container">
+      <div class="navbar-header">
+        <button class="btn btn-link visible-xs pull-right m-r" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+          <i class="fa fa-bars"></i>
+        </button>
+        <a href="../index.html" class="navbar-brand m-r-lg">
+          <img src="img/logo.png" class="m-r-sm">
+        </a>
+      </div>
+      <div class="collapse navbar-collapse">
+        
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <div class="m-t-sm">
+              <a href="./admin" class="btn btn-sm btn-success btn-rounded m-l"><strong>Merchant Login</strong></a>
+            </div>
+          </li>
+        </ul>     
+      </div>
+    </div>
+  </header>
+  <!-- / header -->
+  <div id="content">
+    
+
+
+
+
+    <div class="bg-white-only">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <div class="m-t-xxl m-b-xxl padder-v">
+              <h1 class="font-bold l-h-1x m-t-xxl text-black padder-v animated fadeInDown">
+                Fill out this form to send merchant request.
+              </h1>
+               <form name="form" class="form-validation" id="merchantform">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <span class="h4">Merchant Info</span>
+                  </div>
+                  <div class="panel-body">
+
+                    <p><strong>Use your existing Photopon account to request merchant access</strong></p>
+
+                    <div class="form-group">
+                      <label>Username</label>
+                      <input id="username" type="text" class="form-control" required placeholder="Your current Photopon user name">
+                    </div>
+
+                    <div class="form-group">
+                      <label>Password</label>
+                      <input id="password" type="password" class="form-control" required placeholder="Your Photopon account password">
+                    </div>
+
+                    <p><strong>Please fill company informaiton. All fields are mandatory.</strong></p>
+                    <div class="form-group">
+                      <label>Business name</label>
+                      <input id="business" type="text" class="form-control" required placeholder="Business name which you represent">
+                    </div>
+                    <div class="form-group">
+                      <label>Phone number</label>
+                      <input id="phone" type="text" class="form-control" required placeholder="Business number">
+                    </div>
+                    <div class="form-group">
+                      <label>Tax ID</label>
+                      <input id="taxid" type="text" class="form-control" required placeholder="Tax ID of your business">
+                    </div>
+                    <div class="form-group">
+                      <label>Logo</label>
+                      <input id="logo" type="file" accept="image/*" required>
+                    </div>
+
+                    <div>
+                      <span id="errormessage" class="bg-danger"></span>
+                    </div>
+
+                  </div>
+
+                  <footer class="panel-footer text-right bg-light lter">
+                    <button type="submit" class="btn btn-success">Send Request</button>
+                  </footer>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+  <!-- footer -->
+  <footer id="footer">
+    
+    <div class="bg-white">
+      <div class="container">
+        <div class="row m-t-xl m-b-xl">
+          
+
+          <div class="col-sm-4">
+            <h4 class="text-u-c m-b font-thin"><span class="b-b b-dark font-bold">Find</span> Us</h4>
+            <p class="text-sm">Photopon, Inc.<br>
+              254B Mountain Ave., Suite 201 <br>
+              Hackettstown, 07840, New Jersey
+             </p>
+             <p>Contact us: <a href="mailto:contact@photopon.com">contact@photopon.com</a></p>
+             <p class="m-b-xl">Support: <a href="mailto:support@photopon.com">support@photopon.com</a></p> 
+          </div>
+          <div class="col-sm-4">
+            <h4 class="text-u-c m-b-xl font-thin"><span class="b-b b-dark font-bold">Follow</span> Us</h4>
+            <div class="m-b-xl">
+              <a href="http://www.facebook.com/Photopon" class="btn btn-icon btn-rounded btn-dark"><i class="fa fa-facebook"></i></a>
+              <a href="http://www.twitter.com/Photopon" class="btn btn-icon btn-rounded btn-dark"><i class="fa fa-twitter"></i></a>
+              <a href="http://www.linkedin.com/company/photopon-inc-" class="btn btn-icon btn-rounded btn-dark"><i class="fa fa-linkedin"></i></a>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <h4 class="text-u-c m-b font-thin"><span class="b-b b-dark font-bold">News</span> Letter</h4>
+            <p>Do not want to miss anything? Subscribe to our newsletter box</p>
+            <form class="form-inline m-t m-b text-center m-b-xl">
+              <div class="aside-xl inline">
+                <div class="input-group">
+                    <input type="text" id="address" name="address" class="form-control btn-rounded" placeholder="Your email">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default btn-rounded" type="submit">Subscribe</button>
+                    </span>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+  </footer>
+  <!-- / footer -->
+
+  <script src="libs/jquery/jquery/dist/jquery.js"></script>
+  <script src="libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="libs/jquery/jquery_appear/jquery.appear.js"></script>
+  <script src="https://cdn.jsdelivr.net/parse/1.6.7/parse.min.js"></script>
+  <script src="js/landing.js"></script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-71484200-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+</body>
+</html>

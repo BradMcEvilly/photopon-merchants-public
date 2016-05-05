@@ -1,0 +1,123 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">{{isEditing ? "Edit Coupon" : "Add Coupon"}}</h1>
+</div>
+<div class="wrapper-md">
+  <div>
+    <div class="row">
+      <div class="col-sm-6">
+        <form name="form" class="form-validation" ng-submit="addCoupon()">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <span class="h4">Coupon info</span>
+            </div>
+            <div class="panel-body">
+
+              <p class="text-muted">Please fill the information to continue</p>
+
+              <div class="form-group">
+                <label>Title</label>
+                <input type="text" class="form-control" ng-model="coupon.title" required >
+              </div>
+
+              <div class="form-group">
+                <label>Body</label>
+                <textarea class="form-control" rows="6" ng-model="coupon.body" placeholder="Type your message" required></textarea>
+              </div>
+
+
+              <div class="form-group">
+                <label>Code</label>
+                <input type="text" class="form-control" ng-model="coupon.code" required >
+              </div>
+
+
+
+              <div class="form-group">
+                <label>Expiration date</label>
+                
+                <div class="input-group">
+                  <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="coupon.expiration" is-open="opened" datepicker-options="dateOptions" min-date="minDate" init-date="initDate" ng-required="true" close-text="Close" />
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
+                </div>
+                
+              </div>
+
+
+
+              <div class="form-group">
+
+                <div class="checkbox">
+                  <label class="i-checks">
+                    <input type="checkbox" value="" ng-model="coupon.alllocations">
+                    <i></i>
+                    Available in all locations
+                  </label>
+                </div>
+              </div>
+
+
+              <div class="form-group" ng-hide="coupon.alllocations">
+                <label>Locations</label>
+
+                <ui-select multiple ng-model="coupon.locations"
+                         theme="bootstrap"
+                         ng-disabled="disabled"
+                         reset-search-input="true">
+                  <ui-select-match placeholder="Choose location...">{{$item}}</ui-select-match>
+                  <ui-select-choices repeat="loc in locationNames | filter: $select.search track by $index">
+                    <div ng-bind-html="loc | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+
+            </div>
+
+            <footer class="panel-footer text-right bg-light lter">
+              <button type="submit" class="btn btn-success" ng-disabled="form.$invalid">{{isEditing ? "Edit Coupon" : "Add Coupon"}}</button>
+            </footer>
+          </div>
+        </form>
+      </div>
+
+
+
+      <div class="col-md-6" ng-hide="isEditing">
+        <div class="panel no-border">
+          <div class="panel-heading wrapper b-b b-light">
+            <!--<span class="text-xs text-muted pull-right">
+              <i class="fa fa-circle text-primary m-r-xs"></i> 12
+              <i class="fa fa-circle text-info m-r-xs m-l-sm"></i> 30
+              <i class="fa fa-circle text-warning m-r-xs m-l-sm"></i> 98
+            </span>-->
+            <h4 class="font-thin m-t-none m-b-none text-muted">Coupons</h4>              
+          </div>
+          <ul class="list-group list-group-lg m-b-none">
+            
+            <li class="list-group-item" ng-repeat="c in coupons">
+              <a  ui-sref="app.editcoupon({ id: '{{c.id}}' })">
+                <span class="thumb-sm m-r">
+                  <img src=" {{c.get('company').get('image').url() }} " class="r r-2x">
+                </span>
+                <span class="pull-right label bg-primary inline m-t-sm" title="{{c.getLocationTitleFull()}}">{{c.getLocationTitle()}}</span>
+                <span>{{c.get('title')}}</span>
+              </a>
+            </li>
+
+
+          </ul>
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+
+  <script type="text/ng-template" id="removeLocationModal.html">
+    <div ng-include="'tpl/modal.html'"></div>
+  </script>
+
+
+</div>

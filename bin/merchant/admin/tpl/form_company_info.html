@@ -1,0 +1,148 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Company Info</h1>
+</div>
+<div class="wrapper-md">
+  <div>
+    <div class="row">
+      <div class="col-sm-6">
+        <form name="form" class="form-validation" ng-submit="saveInfo()" ng-show="company">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <span class="h4">Comapny info</span>
+            </div>
+            <div class="panel-body">
+
+              <div class="form-group">
+                <label>Comapny Name</label>
+                <input type="text" class="form-control" ng-model="companyInfo.name" required >
+              </div>
+
+              <div class="form-group" ng-show="companyInfo.image">
+                <label>Comapny Logo</label>
+                <div>
+                  <a href class="thumb-sm m-r">
+                    <img src=" {{ companyInfo.image }} " class="r r-2x">
+                  </a>
+                  <a ng-click="removeImage()">&nbsp;&nbsp;&nbsp;<i class="icon-trash fa-fw" style="vertical-align: middle;"></i> Remove Logo</a>
+                </div>
+              </div>
+
+         
+              <div class="form-group" ng-hide='companyInfo.image'>
+
+                <label>Choose Logo for Comapny</label>
+
+                <div class="m-b">
+                  <input ui-jq="filestyle" type="file" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s" id="fileInput">
+                </div>
+              </div>
+
+
+
+
+              <div class="form-group" ng-show='fileselected'>
+                <label>Please crop your logo</label>
+                <div class="hbox hbox-auto-xs">
+
+                  <div class="col">
+                    <div class="wrapper-sm b-a bg-white m-r-xs m-b-xs">
+                      <div class="bg-light" style="height:320px">
+                        <img-crop 
+                          image="myImage" 
+                          result-image="myCroppedImage"
+                          result-image-size="160"
+                          area-type="{{cropType}}"
+                        ></img-crop>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="col">
+                    <div class="inline bg-white wrapper-sm b-a">
+                      <div class="bg-light">
+                        <img ng-src="{{myCroppedImage}}" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+
+
+            </div>
+
+            <footer class="panel-footer text-right bg-light lter">
+              <button type="submit" class="btn btn-success" ng-disabled="form.$invalid">Save Information</button>
+            </footer>
+          </div>
+        </form>
+      </div>
+
+
+
+      <div class="col-md-6">            
+        <div class="panel no-border">
+          
+          <div class="panel-heading wrapper b-b b-light">
+            <h4 class="font-thin m-t-none m-b-none text-muted">Locations</h4>              
+          </div>            
+
+          <ul class="list-group list-group-lg m-b-none">
+
+            <li class="list-group-item" ng-hide="locations.length">
+              <a href class="thumb-sm m-r">
+                
+                <i class="icon-bell fa-fw" style="
+                    font-size: 26px;
+                    vertical-align: middle;
+                "></i>
+
+              </a>
+              
+              <a href style="display: inline-block; vertical-align: middle;">
+                <span>You have no locations yet.</span>
+              </a>
+            </li>
+            
+
+
+
+            <li class="list-group-item" ng-repeat="l in locations">
+              <a href class="thumb-sm m-r">
+                
+                <i class="icon-pointer fa-fw" style="
+                    font-size: 26px;
+                    vertical-align: middle;
+                "></i>
+
+              </a>
+
+              <span class="pull-right label bg-danger inline m-t-sm">{{l.get('location').latitude}}, {{l.get('location').longitude}}</span>
+
+              <a href style="display: inline-block; vertical-align: middle;">
+                <span>{{l.get("name")}}</span>
+                <br>
+                <span class="text-muted">{{l.get("address")}}</span>
+              </a>
+            </li>
+            
+
+          </ul>
+          
+        </div>
+      </div>
+
+
+
+    </div>
+
+  </div>
+
+  <script type="text/ng-template" id="removeLocationModal.html">
+    <div ng-include="'tpl/modal.html'"></div>
+  </script>
+
+
+</div>

@@ -1,0 +1,134 @@
+<div class="container w-xxxl w-auto-lg" ng-controller="RequestFormController" ng-init="app.settings.container = false;">
+  <a href="/merchants/" class="navbar-brand block m-t-xxl">
+      <img src="img/logo.png" alt="Photopon">
+  </a>
+
+
+  <div class="m-b-lg" ng-hide="requestSent">
+    <div class="wrapper text-center">
+      <strong>Request merchant access</strong>
+    </div>
+
+    <div class="list-group list-group-sm bg-primary wrapper" ng-show="currentUser">
+
+      <h4>Hello {{currentUser.get("username")}}, you are already signed in as merchant. If you want to request merchant access for another user please <a href="#" ng-click="signout()">Sign out</a></p>
+      
+    </div>
+
+ 
+
+    <form name="form" class="form-validation" ng-submit="request()" ng-hide="currentUser">
+      <div class="text-danger wrapper text-center" ng-show="authError">
+          {{authError}}
+      </div>
+
+
+      <div class="list-group list-group-sm">
+
+        <p class="text-muted">Use your existing Photopon account to request access</p>
+        <div class="list-group-item">
+          <input type="text" placeholder="Username" class="form-control no-border" ng-model="user.username" required>
+        </div>
+        <div class="list-group-item">
+           <input type="password" placeholder="Password" class="form-control no-border" ng-model="user.password" required>
+        </div>
+      </div>
+
+      
+
+
+      <div class="list-group list-group-sm">
+
+        <p class="text-muted">Please fill company information.</p>
+        <div class="list-group-item">
+          <input type="text" placeholder="Business name" class="form-control no-border" ng-model="user.companyname" required>
+        </div>
+        
+        <div class="list-group-item">
+          <input type="text" placeholder="Phone number" class="form-control no-border" ng-model="user.phonenumber" required>
+        </div>
+        
+        <div class="list-group-item">
+          <input type="text" placeholder="Tax ID" class="form-control no-border" ng-model="user.taxid" required>
+        </div>
+        
+        <div class="list-group-item">
+          <input type="text" placeholder="Promo Code (optional)" class="form-control no-border" ng-model="user.promocode">
+        </div>
+        
+        <div class="list-group-item">
+
+           
+                <div class="form-group" >
+
+                  <label>Choose Logo for Company (optional)</label>
+
+                  <div class="m-b">
+                    <input ui-jq="filestyle" type="file" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s" id="fileInput">
+                  </div>
+                </div>
+
+
+
+
+                <div class="form-group" ng-show='fileselected'>
+                  <label>Please crop your logo</label>
+                  <div class="hbox hbox-auto-xs">
+
+                    <div class="col">
+                      <div class="wrapper-sm b-a bg-white m-r-xs m-b-xs">
+                        <div class="bg-light" style="height:320px">
+                          <img-crop 
+                            image="myImage" 
+                            result-image="myCroppedImage"
+                            result-image-size="160"
+                            area-type="{{cropType}}"
+                          ></img-crop>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="col">
+                      <div class="inline bg-white wrapper-sm b-a">
+                        <div class="bg-light">
+                          <img ng-src="{{myCroppedImage}}" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
+
+
+        </div>
+        
+
+      </div>
+
+
+      <button type="submit" class="btn btn-lg btn-primary btn-block" ng-disabled='form.$invalid'>Request Access</button>
+    </form>
+  </div>
+
+
+
+  <div class="m-b-lg" ng-show="requestSent">
+    <div class="wrapper text-center">
+      <strong>Request merchant access</strong>
+    </div>
+
+    <div class="list-group list-group-sm bg-primary wrapper">
+
+      <h4>Hello {{currentUser.get("username")}}, your request has been sent for review. Our support team will conact you in 24 hours.</h4>
+      
+    </div>
+
+  </div>
+
+
+  <div class="text-center" ng-include="'tpl/blocks/page_footer.html'">
+    {% include 'blocks/page_footer.html' %}
+  </div>
+</div>

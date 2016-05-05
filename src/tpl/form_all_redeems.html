@@ -1,0 +1,138 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">All Redeems</h1>
+</div>
+<div class="wrapper-md">
+  <div>
+    
+      <div class="row" ng-show="redeems">
+        <div class="col-sm-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              Redeem locations
+            </div>
+            
+            <div id="map_canvas" style="min-height:400px" ui-map="myMap"
+                 ui-options="mapOptions">
+            </div>
+
+            <div ng-repeat="marker in myMarkers" ui-map-marker="myMarkers[$index]"
+                 ui-event="{'map-click': 'openMarkerInfo(marker)'}">
+            </div>
+
+            <div ui-map-info-window="myInfoWindow">
+              <div class="m-b-sm"><strong>Redeem</strong></div>
+              <div class="m-b-sm">Title: {{currentMarker.redeem.get('coupon').get('title')}}</div>
+              <div class="m-b-sm">Expiration: {{currentMarker.redeem.getExpiration()}}</div>
+              <div class="m-b-sm">Time: {{currentMarker.redeem.getCreateTime()}}</div>
+            </div>
+            
+
+          </div>
+        </div>
+      </div>
+
+      <div class="row" ng-show="userInfo">
+        <div class="col-sm-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              User information
+            </div>
+            
+            <div class="row">
+              <div class="col-sm-2 wrapper-sm padder-lg">
+                <div style="width:100%; 
+                          height:100%; 
+                          min-height:128px; 
+                          background-image: url( {{userInfo.get('image').url() }});
+                          background-size: contain;
+                          background-repeat: no-repeat;">
+                </div>
+              </div>
+
+              <div class="col-sm-5">
+                <h4><strong>Username: </strong>{{userInfo.get("username")}}</h4>
+                <h4><strong>E-mail: </strong>{{userInfo.get("email")}}</h4>
+                <h4><strong>User since: </strong>{{userInfo.getCreatedAt()}}</h4>
+                <h4><strong>Phone: </strong>{{userInfo.getUserPhone()}}</h4>
+              </div>
+          
+              <div class="col-sm-5">
+                <h4><strong>Redeems from this user: </strong> {{userInfo.numRedeems}}</h4>
+              </div>
+
+
+
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <div class="row" ng-show="redeems">
+        <div class="col-sm-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              All Redeems
+            </div>
+            <table class="table table-striped m-b-none">
+              <thead>
+                <tr>
+                  <th ng-hide="isCouponDetail">Title</th>
+                  <th ng-hide="isCouponDetail">Expiration</th>
+                  <th>User</th>
+                  <th>Sender</th>
+                  <th>Location</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr ng-repeat="c in redeems">                    
+                  <td ng-hide="isCouponDetail">{{c.get('coupon').get('title')}}</td>
+                  <td ng-hide="isCouponDetail">{{c.getExpiration()}}</td>
+
+                  <td>
+                    <strong>Username:</strong> {{c.getUserName('to')}} <br>
+                    <strong>Email:</strong> {{c.getUserEmail('to')}} <br>
+                    <strong>Phone:</strong> {{c.getUserPhone('to')}} <br>
+
+                    <button class="btn btn-default btn-xs" ng-click="showUserInfo(c.getUser('to'))">View details</button>
+
+                  </td>
+
+                  <td>
+                    <div ng-show="c.getUser('from')">
+                      <strong>Username:</strong> {{c.getUserName('from')}} <br>
+                      <strong>Email:</strong> {{c.getUserEmail('from')}} <br>
+                      <strong>Phone:</strong> {{c.getUserPhone('from')}} <br>
+                      <button class="btn btn-default btn-xs" ng-click="showUserInfo(c.getUser('from'))">View details</button>
+                    </div>
+
+                    <div ng-hide="c.getUser('from')">
+                      <strong>No Sender</strong>
+                    </div>
+                  </td>
+
+                  <td>
+                    <button class="btn btn-default btn-xs" ng-click="openMarkerInfo(c.marker)">({{c.get('location').latitude}}, {{c.get('location').longitude}})</button>
+                  </td>
+                  <td>{{c.getCreateTime()}}</td>
+                  
+                </tr>
+
+
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+
+
+  </div>
+
+</div>

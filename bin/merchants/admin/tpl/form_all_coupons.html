@@ -1,0 +1,62 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">All Coupons</h1>
+</div>
+<div class="wrapper-md">
+  <div>
+ 
+<toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+
+
+<!-- Coupons -->
+      <div class="row" ng-show="coupons">
+        <div class="col-sm-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              All Coupons
+            </div>
+            <table class="table table-striped m-b-none">
+              <thead>
+                <tr>
+                  <th>Is active</th>
+                  <th>Title</th>
+                  <th>Locations</th>
+                  <th>Expiration</th>
+                 
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr ng-repeat="c in coupons">   
+
+                  <td>
+                    <label class="i-checks m-b-none">
+                      <input type="checkbox" ng-model="c.isActive" ng-change="onCouponStatusChange()"><i></i>
+                    </label>
+                  </td>                 
+                  
+                  <td  ui-sref="app.editcoupon({ id: '{{c.id}}' })">{{c.get('title')}}</td>
+                  <td  ui-sref="app.editcoupon({ id: '{{c.id}}' })">{{c.getLocationTitle()}}</td>
+
+                  <td>{{c.getExpiration()}} (<span style="color:{{ c.getExpirationDeltaColor() }};">{{ c.getExpirationDelta() }}</span>) </td>
+                  
+                  
+                </tr>
+
+
+              </tbody>
+            </table>
+
+
+            <footer class="panel-footer text-right bg-light lter">
+              <button type="submit" class="btn btn-success" ui-sref="app.addcoupon">New Coupon</button>
+            </footer>
+          </div>
+        </div>
+      </div>
+<!-- /Coupons -->
+
+
+
+  </div>
+
+</div>

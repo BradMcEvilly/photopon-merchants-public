@@ -1,0 +1,155 @@
+<div class="bg-light lt b-b wrapper-md">
+  <div class="row">
+    <div class="col-sm-6 col-xs-12">
+      <h1 class="m-n font-thin h3 text-black">Admin Panel</h1>
+    </div>
+  </div>
+</div>
+<div class="hbox hbox-auto-xs hbox-auto-sm">
+  <!-- main -->
+  <div class="col">
+    <!-- / main header -->
+    <div class="wrapper-md">
+      <!-- stats -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row row-sm text-center">
+            <div class="col-xs-3">
+              <div class="panel padder-v item card">
+                <div class="h1 text-info font-thin h1">{{companies.length}}</div>
+                <span class="text-muted text-xs">Companies</span>
+                <div class="top text-right w-full">
+                  <i class="fa fa-caret-down text-warning m-r-sm"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-3">
+              <a href class="block panel padder-v item card">
+                <span class="text-success font-thin h1 block">{{numCoupons}}</span>
+                <span class="text-muted text-xs">Coupons</span>
+                <span class="bottom text-right w-full">
+                  <i class="fa fa-cloud-upload text-success m-r-sm"></i>
+                </span>
+              </a>
+            </div>
+            <div class="col-xs-3">
+              <a href class="block panel padder-v item card">
+                <span class="text-primary font-thin h1 block">{{stats.numShares}}</span>
+                <span class="text-muted text-xs">Total Shares</span>
+                <span class="top text-left">
+                  <i class="fa fa-caret-up text-warning m-l-sm"></i>
+                </span>
+              </a>
+            </div>
+            <div class="col-xs-3">
+              <div class="panel padder-v item card">
+                <div class="font-thin h1">{{stats.numRedeems}}</div>
+                <span class="text-muted text-xs">Total Redeems</span>
+                <div class="bottom text-left">
+                  <i class="fa fa-caret-up text-warning m-l-sm"></i>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+      </div>
+      <!-- / stats -->
+
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <span class="label bg-danger pull-right m-t-xs">Total: {{stats.numRedeems}}/{{stats.numShares}}</span>
+              Companies
+            </div>
+            <table class="table table-striped m-b-none">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Loctions</th>
+                  <th>Coupons</th>
+                  <th>Shared</th>
+                  <th>Redeemed</th>
+                  <th>Ratio</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr ng-repeat="c in companies">                    
+                  <td>{{c.get('name')}}</td>
+                  <td>{{c.numLocations}}</td>
+                  <td>{{c.numCoupons}}</td>
+                  <td>{{c.numShared}}</td>
+                  <td>{{c.numRedeemed}}</td>
+                  <td>
+                    <div class="progress progress-xs m-t-xs m-b-none">
+                      <div class="progress-bar bg-info" data-toggle="tooltip" data-original-title="{{c.shareRatio}}" style="width: {{c.shareRatio}}"></div>
+                    </div>
+                  </td>
+                  
+                </tr>
+
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+          <div class="col-md-6">
+            <div class="panel no-border">
+              <div class="panel-heading wrapper b-b b-light">
+                <h4 class="font-thin m-t-none m-b-none text-muted">Merchant requests</h4>              
+              </div>
+              <ul class="list-group list-group-lg m-b-none">
+
+
+                <li class="list-group-item" ng-hide="requests.length">
+                  <a href class="thumb-sm m-r">
+                    
+                    <i class="icon-bell fa-fw" style="
+                        font-size: 26px;
+                        vertical-align: middle;
+                    "></i>
+
+                  </a>
+                  
+                  <a href style="display: inline-block; vertical-align: middle;">
+                    <span>You have no merchant requests.</span>
+                  </a>
+                </li>
+                
+
+
+                
+                <li class="list-group-item" ng-repeat="r in requests">
+                  <a href class="thumb-sm m-r">
+                    <img src=" {{r.get('user').get('image').url() }} " class="r r-2x">
+                  </a>
+                  <!--<span class="pull-right label bg-primary inline m-t-sm">{{r.get('user').get('username')}}</span>-->
+                  <a>{{r.get('user').get('email')}}</a>
+
+                  <button class="pull-right btn btn-danger btn-addon btn-sm m-l-xs" ng-click="denyRequest()"> <i class="fa fa-minus"></i>Deny</button>
+                  
+                  <button class="pull-right btn btn-success btn-addon btn-sm" ng-click="acceptRequest()"> <i class="fa fa-plus"></i>Accept</button>
+                </li>
+
+
+              </ul>
+              
+            </div>
+          </div>
+
+      </div>
+
+
+
+    </div>
+  </div>
+
+</div>

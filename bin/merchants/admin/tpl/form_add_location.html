@@ -1,0 +1,145 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">{{isEditing ? "Edit Location" : "Add Location"}}</h1>
+</div>
+<div class="wrapper-md">
+  <div>
+    <div class="row">
+      <div class="col-sm-6">
+        <form name="form" class="form-validation" ng-submit="addLocation()">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <span class="h4">Location Info</span>
+            </div>
+            <div class="panel-body">
+
+              <p class="text-muted">Please fill the information to continue</p>
+
+              <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control" ng-model="location_title" required >
+              </div>
+
+              <div class="form-group">
+                <label>Address</label>
+
+                <ui-select ng-model="address.selected"
+                         theme="bootstrap"
+                         ng-disabled="disabled"
+                         reset-search-input="true">
+                  <ui-select-match placeholder="Enter an address...">{{$select.selected.formatted_address}}</ui-select-match>
+                  <ui-select-choices repeat="address in addresses track by $index"
+                           refresh="refreshAddresses($select.search)"
+                           refresh-delay="0">
+                    <div ng-bind-html="address.formatted_address | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+
+
+              <div class="form-group"  ng-show="address.selected.formatted_address">
+                <label>Selected address</label>
+                <p class="form-control-static">{{address.selected.formatted_address}}</p>
+              </div>
+                
+              <div class="form-group"  ng-show="address.selected.formatted_address">
+                <label class="control-label">Coordinates</label>
+                <div class="form-inline">
+                  <div class="form-group">
+
+                    <label class="control-label">Latitude: </label>
+                    <input class="form-control" type="text" ng-model="address.selected.geometry.location.lat" ng-change="updateAddress()">
+                  </div>                    
+
+                  <div class="form-group">
+                    <label class="control-label"> Longitude: </label>
+                    <input class="form-control" type="text" ng-model="address.selected.geometry.location.lng" ng-change="updateAddress()">
+                  </div>                    
+                </div>
+              </div>                
+
+              
+              <div class="form-group"  ng-show="address.selected.formatted_address">
+                <label ng-show="address.selected.formatted_address">Map</label>
+                <iframe
+                  width="100%"
+                  height="450"
+                  frameborder="0" style="border:0"
+                  src="{{trustSrc(address.selected.mapurl)}}">
+                </iframe>
+              </div>
+
+            </div>
+
+            <footer class="panel-footer text-right bg-light lter">
+              <button type="submit" class="btn btn-success" ng-disabled="form.$invalid">{{isEditing ? "Edit Location" : "Add Location"}}</button>
+            </footer>
+          </div>
+        </form>
+      </div>
+
+
+
+
+
+      <div class="col-md-6" ng-hide="isEditing">            
+        <div class="panel no-border">
+          
+          <div class="panel-heading wrapper b-b b-light">
+            <h4 class="font-thin m-t-none m-b-none text-muted">Locations</h4>              
+          </div>            
+
+          <ul class="list-group list-group-lg m-b-none">
+
+            <li class="list-group-item" ng-hide="locations.length">
+              <a href class="thumb-sm m-r">
+                
+                <i class="icon-bell fa-fw" style="
+                    font-size: 26px;
+                    vertical-align: middle;
+                "></i>
+
+              </a>
+              
+              <a href style="display: inline-block; vertical-align: middle;">
+                <span>You have no locations yet.</span>
+              </a>
+            </li>
+            
+
+
+
+            <li class="list-group-item" ng-repeat="l in locations">
+              <a href class="thumb-sm m-r">
+                
+                <i class="icon-pointer fa-fw" style="
+                    font-size: 26px;
+                    vertical-align: middle;
+                "></i>
+
+              </a>
+
+              <span class="pull-right label bg-danger inline m-t-sm">{{l.get('location').latitude}}, {{l.get('location').longitude}}</span>
+
+              <a href style="display: inline-block; vertical-align: middle;" ui-sref="app.editlocation({ id: '{{l.id}}' })">
+                <span>{{l.get("name")}}</span>
+                <br>
+                <span class="text-muted">{{l.get("address")}}</span>
+              </a>
+            </li>
+            
+
+          </ul>
+          
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script type="text/ng-template" id="removeLocationModal.html">
+    <div ng-include="'tpl/modal.html'"></div>
+  </script>
+
+
+</div>

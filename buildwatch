@@ -1,0 +1,51 @@
+var fs = require("fs");
+var sys = require('sys')
+var exec = require('child_process').execSync;
+
+
+function puts(error, stdout, stderr) { 
+	sys.puts(stdout) 
+}
+
+
+function doBuild() {
+	exec("grunt build:dev", { 
+		stdio: [0,1,2] 
+	});
+
+	exec("afplay /System/Library/Sounds/Ping.aiff ", { 
+		stdio: [0,1,2] 
+	});
+
+
+	console.log("Build finished!")
+	startWatching();
+}
+
+
+function startWatching() {
+	console.log("Watching for file changes...");
+
+	var watcher = null;
+	var isWatching = true;
+
+	watcher = fs.watch("./src", { 
+		recursive: true, 
+		persistent: true 
+	}, function(e, f) { 
+
+		if (!isWatching) {
+			return;
+		}
+
+		isWatching = false;
+
+		console.log("File changed: " + f);
+		watcher.close();
+
+		setTimeout(doBuild, 10);
+	});
+
+};
+
+startWatching();
